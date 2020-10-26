@@ -7,7 +7,7 @@
 ### Install
 
 ```sh
-git clone https://github.com/JeGwan/shopping-basket.git && cd shopping-basket
+git clone https://github.com/JeGwan/shopping-cart.git && cd shopping-cart
 yarn && yarn add -D babel-plugin-styled-components typescript
 ```
 
