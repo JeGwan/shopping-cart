@@ -1,10 +1,5 @@
-import styled from 'styled-components'
-
-const Title = styled.h1`
-  color: red;
-  font-size: 50px;
-`
+import Layout from "../components/Layout";
 
 export default function Home() {
-  return <Title>My page</Title>
+  return <Layout title="메인">메인 페이지</Layout>;
 }
