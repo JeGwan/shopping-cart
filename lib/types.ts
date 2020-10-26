@@ -20,3 +20,8 @@ export interface ProductItem {
   score: number;
   availableCoupon?: boolean;
 }
+
+export interface CartItem {
+  product: ProductItem;
+  count: number;
+}
