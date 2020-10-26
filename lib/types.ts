@@ -24,4 +24,5 @@ export interface ProductItem {
 export interface CartItem {
   product: ProductItem;
   count: number;
+  buy: boolean;
 }

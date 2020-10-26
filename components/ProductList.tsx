@@ -4,6 +4,7 @@ import { HTMLAttributes, useContext } from "react";
 import styled from "styled-components";
 import { AppContext } from "../lib/context";
 import { ProductItem } from "../lib/types";
+import { displayPrice, displayScore } from "../lib/utils";
 import Row from "./Row";
 
 interface ProductItemCompProps extends HTMLAttributes<HTMLUListElement> {
@@ -112,14 +113,12 @@ const ProductList = ({ productItems, ...props }: ProductItemCompProps) => {
                 </Coupon>
                 <div className="score">
                   <HeartFilled translate="no" style={{ marginRight: 2 }} />
-                  {productItem.score.toLocaleString("en-US")}
+                  {displayScore(productItem.score)}
                 </div>
               </Row>
               <h3 className="title">{productItem.title}</h3>
               <Row>
-                <div className="price">
-                  {productItem.price.toLocaleString("en-US")}원
-                </div>
+                <div className="price">{displayPrice(productItem.price)}</div>
                 {isInCart ? (
                   <Button
                     type="primary"

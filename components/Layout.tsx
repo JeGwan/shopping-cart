@@ -44,7 +44,7 @@ const Layout = ({ title, children, ...props }: LayoutProps) => {
   return (
     <Container {...props}>
       <Head>
-        <title>{`클래스101${title ? ` : ${title}` : ""}`}</title>
+        <title>{`클래스101${title ? ` | ${title}` : ""}`}</title>
       </Head>
       <Nav>
         <Link href="/" passHref>

@@ -1,6 +1,6 @@
 import coupons from "../data/coupons";
 import productItems from "../data/productItems";
-import { ProductItem } from "./types";
+import { Coupon, ProductItem } from "./types";
 
 interface ApiSuccessResponse<Data> {
   success: true;
@@ -22,9 +22,11 @@ interface getProductsProps {
 }
 
 export default class Api {
-  private static data = {
-    coupons,
-    productItems,
+  static getCoupons = (): ApiResponse<{ coupons: Coupon[] }> => {
+    return {
+      success: true,
+      data: { coupons },
+    };
   };
 
   static getProducts = ({

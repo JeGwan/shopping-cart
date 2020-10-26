@@ -1,4 +1,5 @@
 import { NextRouter, useRouter } from "next/router";
+import { CartItem, Coupon } from "./types";
 
 export const usePagination = () => {
   const router = useRouter();
@@ -31,3 +32,31 @@ export function mergeQueryString(router: NextRouter, queries: Queries) {
     .map((key) => `${key}=${merged[key]}`)
     .join("&")}`;
 }
+export const displayScore = (score: number) => score.toLocaleString("en-US");
+export const displayPrice = (price: number) =>
+  Math.floor(price).toLocaleString("en-US");
+export const calculatePrice = (buyList: CartItem[], coupon?: Coupon) => {
+  let couponablePrice = 0,
+    notCouponablePrice = 0,
+    totalPrice = 0,
+    discountPrice = 0;
+  buyList.forEach(({ count, product }) => {
+    const couponable = product.availableCoupon !== false;
+    if (couponable) couponablePrice += product.price * count;
+    else notCouponablePrice += product.price * count;
+  });
+  if (coupon) {
+    if (coupon.type === "amount") {
+      discountPrice = coupon.discountAmount;
+    } else {
+      discountPrice = couponablePrice * (coupon.discountRate / 100);
+    }
+  }
+  totalPrice = couponablePrice + notCouponablePrice - discountPrice;
+  return {
+    totalPrice,
+    couponablePrice,
+    notCouponablePrice,
+    discountPrice,
+  };
+};

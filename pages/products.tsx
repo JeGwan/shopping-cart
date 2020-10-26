@@ -7,6 +7,7 @@ import Api from "../lib/api";
 import { mergeQueryString, Queries, usePagination } from "../lib/utils";
 import ProductList from "../components/ProductList";
 import Row from "../components/Row";
+import GoToCart from "../components/GoToCart";
 const { Option } = Select;
 const ProductsPage = () => {
   const router = useRouter();
@@ -84,6 +85,7 @@ const ProductsPage = () => {
           <Option value={12}>12개 / 페이지</Option>
         </Select>
       </Row>
+      <GoToCart />
     </Layout>
   );
 };
