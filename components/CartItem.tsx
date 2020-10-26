@@ -2,7 +2,7 @@ import { Checkbox } from "antd";
 import { HTMLAttributes, useContext } from "react";
 import styled from "styled-components";
 import { AppContext } from "../lib/context";
-import { CartItem } from "../lib/types";
+import { CartItem as CartItemType } from "../lib/types";
 import { displayPrice } from "../lib/utils";
 import NumberInput from "./NumberInput";
 import Row from "./Row";
@@ -49,7 +49,7 @@ const CartItemComp = styled.div`
 `;
 
 interface CartItemProps extends HTMLAttributes<HTMLDivElement> {
-  cartItem: CartItem;
+  cartItem: CartItemType;
 }
 const CartItem = ({ cartItem, ...props }: CartItemProps) => {
   const { cart, setCart } = useContext(AppContext);
