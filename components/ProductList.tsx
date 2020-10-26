@@ -1,7 +1,8 @@
-import { HeartFilled, PlusOutlined } from "@ant-design/icons";
+import { HeartFilled, MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button } from "antd";
-import { HTMLAttributes } from "react";
+import { HTMLAttributes, useContext } from "react";
 import styled from "styled-components";
+import { AppContext } from "../lib/context";
 import { ProductItem } from "../lib/types";
 import Row from "./Row";
 
@@ -89,9 +90,15 @@ const Coupon = styled.div<{ available: boolean }>`
   font-weight: bold;
 `;
 const ProductList = ({ productItems, ...props }: ProductItemCompProps) => {
+  const { cart, addProductToCart, removeProductFromCart } = useContext(
+    AppContext
+  );
   return (
     <ProdcutListContainer {...props}>
       {productItems.map((productItem, index) => {
+        const isInCart = cart.find(
+          (cartItem) => cartItem.product.id === productItem.id
+        );
         const couponAvailable = productItem.availableCoupon !== false;
         return (
           <ProductItemContainer key={index}>
@@ -113,13 +120,26 @@ const ProductList = ({ productItems, ...props }: ProductItemCompProps) => {
                 <div className="price">
                   {productItem.price.toLocaleString("en-US")}원
                 </div>
-                <Button
-                  type="primary"
-                  size="small"
-                  icon={<PlusOutlined translate="no" />}
-                >
-                  담기
-                </Button>
+                {isInCart ? (
+                  <Button
+                    type="primary"
+                    size="small"
+                    icon={<MinusOutlined translate="no" />}
+                    onClick={() => removeProductFromCart(productItem)}
+                    danger
+                  >
+                    빼기
+                  </Button>
+                ) : (
+                  <Button
+                    type="primary"
+                    size="small"
+                    icon={<PlusOutlined translate="no" />}
+                    onClick={() => addProductToCart(productItem)}
+                  >
+                    담기
+                  </Button>
+                )}
               </Row>
             </div>
           </ProductItemContainer>
